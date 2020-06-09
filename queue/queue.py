@@ -27,43 +27,61 @@ Stretch: What if you could only use instances of your Stack class to implement t
 #     def dequeue(self):
 #         return self.storage.pop() if self.storage else None
 
-class Node: 
-    # Function to initialise the node object 
-    def __init__(self, data): 
-        self.data = data # Assign data 
-        self.next = None # Initialize next as null 
-class LinkedList: 
+# class Node: 
+#     # Function to initialise the node object 
+#     def __init__(self, data): 
+#         self.data = data # Assign data 
+#         self.next = None # Initialize next as null 
+# class LinkedList: 
   
-    # Function to initialize head 
-    def __init__(self): 
-        self.head = None
-        self.tail = None
+#     # Function to initialize head 
+#     def __init__(self): 
+#         self.head = None
+#         self.tail = None
   
+# class Queue:
+#     def __init__(self):
+#         self.head = None
+#         self.tail = None
+#     def __len__(self): 
+#         temp = self.head # Initialise temp 
+#         count = 0 # Initialise count 
+  
+#         # Loop while end of linked list is not reached 
+#         while (temp): 
+#             count += 1
+#             temp = temp.next
+#         return count 
+#     def enqueue(self, data):
+#         if self.tail is None:
+#             self.head = Node(data)
+#             self.tail = self.head
+#         else:
+#             self.tail.next = Node(data)
+#             self.tail = self.tail.next
+ 
+#     def dequeue(self):
+#         if self.head is None:
+#             return None
+#         else:
+#             to_return = self.head.data
+#             self.head = self.head.next
+#             return to_return
+import sys
+sys.path.append('./linkedlist.py')
+from linkedlist import LinkedList
+
 class Queue:
     def __init__(self):
-        self.head = None
-        self.tail = None
-    def __len__(self): 
-        temp = self.head # Initialise temp 
-        count = 0 # Initialise count 
-  
-        # Loop while end of linked list is not reached 
-        while (temp): 
-            count += 1
-            temp = temp.next
-        return count 
-    def enqueue(self, data):
-        if self.tail is None:
-            self.head = Node(data)
-            self.tail = self.head
-        else:
-            self.tail.next = Node(data)
-            self.tail = self.tail.next
- 
+        self.size = 0
+        self.storage = LinkedList()
+    def __len__(self):
+        return self.size
+    def enqueue(self, item):
+        self.storage.add_to_tail(item)
+        self.size += 1
+
     def dequeue(self):
-        if self.head is None:
-            return None
-        else:
-            to_return = self.head.data
-            self.head = self.head.next
-            return to_return
+        if self.size is not 0:
+            self.size -= 1
+            return self.storage.remove_head()
